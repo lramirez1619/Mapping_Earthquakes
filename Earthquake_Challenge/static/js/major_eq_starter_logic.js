@@ -55,6 +55,7 @@ let overlays = {
 // layers are visible.
 L.control.layers(baseMaps, overlays).addTo(map);
 
+  // 3. Retrieve the major earthquake GeoJSON data >4.5 mag for the week.
 // Retrieve the earthquake GeoJSON data.
 d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson").then(function (data) {
 
@@ -122,12 +123,12 @@ d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geoj
   allEarthquakes.addTo(map);
 
   // 3. Retrieve the major earthquake GeoJSON data >4.5 mag for the week.
-  d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_week.geojson").then(function (data) {
-    L.geoJson(data, {
-      style: { color: "#703606", weight: 3 },
-    }).addTo(majorEarthquakes);
-  });
-  majorEarthquakes.addTo(map);
+ // d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_week.geojson").then(function (data) {
+   // L.geoJson(data, {
+   //   style: { color: "#000000", weight: 3 },
+  //  }).addTo(majorEarthquakes);
+  //});
+  //majorEarthquakes.addTo(map);
 
 
 // 4. Use the same style as the earthquake data.
@@ -166,7 +167,7 @@ function getRadius(magnitude) {
 // sets the style of the circle, and displays the magnitude and location of the earthquake
 //  after the marker has been created and styled.
 L.geoJson(data, {
-    pointToLayer: function (feature, latlng) {
+    pointToLayer: function (feature, latlng) {  
       return L.circleMarker(latlng);
     },
     style: styleInfo,
